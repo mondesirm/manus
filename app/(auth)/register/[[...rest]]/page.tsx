@@ -1,5 +1,6 @@
 import { SignUp } from "@clerk/nextjs";
 import Link from "next/link";
+import { clerkAppearance } from "@/lib/clerk";
 
 export default function RegisterPage() {
   return (
@@ -10,7 +11,7 @@ export default function RegisterPage() {
         <h1>Start with clarity.</h1>
         <p>A quieter home for your team, from the very first day.</p>
       </div>
-      <SignUp routing="path" path="/register" signInUrl="/login" />
+      <SignUp appearance={clerkAppearance} routing="path" path="/register" signInUrl="/login" />
     </main>
   );
 }

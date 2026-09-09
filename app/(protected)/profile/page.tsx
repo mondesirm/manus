@@ -2,8 +2,9 @@ import Image from "next/image";
 import { Card, Heading, Text } from "@once-ui-system/core";
 import { requireUser } from "@/lib/auth";
 
-export default async function UserPage() {
-  const { clerkUser, user } = await requireUser();
+export default async function ProfilePage() {
+  const identity = await requireUser();
+  const { clerkUser, user } = identity;
   const name = [user.firstName, user.lastName].filter(Boolean).join(" ") || "Your profile";
   const initials = (user.firstName?.[0] || user.email[0]).toUpperCase();
 
@@ -23,7 +24,7 @@ export default async function UserPage() {
           <p className="detail-label">Profile details</p>
           <div className="detail-row"><span>First name</span><strong>{user.firstName || "Not set"}</strong></div>
           <div className="detail-row"><span>Last name</span><strong>{user.lastName || "Not set"}</strong></div>
-          <div className="detail-row"><span>Account status</span><strong className="status-live">Active</strong></div>
+          <div className="detail-row"><span>Organization</span><strong>{identity.organization?.name ?? "No organization"}</strong></div>
         </div>
       </section>
     </main>
